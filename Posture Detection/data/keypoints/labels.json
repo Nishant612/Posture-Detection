@@ -1,0 +1,22 @@
+[
+  {
+    "frame_start": 0,
+    "frame_end": 150,
+    "label": "attentive"
+  },
+  {
+    "frame_start": 150,
+    "frame_end": 300,
+    "label": "distracted"
+  },
+  {
+    "frame_start": 300,
+    "frame_end": 450,
+    "label": "hand_raising"
+  },
+  {
+    "frame_start": 450,
+    "frame_end": 600,
+    "label": "writing"
+  }
+]
