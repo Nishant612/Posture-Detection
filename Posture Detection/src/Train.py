@@ -20,7 +20,7 @@ HISTORY_FILE = os.path.join(MODELS_DIR, "training_history.json")
 
 
 class PostureClassifier(nn.Module):
-    
+
     def __init__(self):
         super().__init__()
         self.network = nn.Sequential(

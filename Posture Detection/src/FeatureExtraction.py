@@ -9,9 +9,6 @@ from config import KEYPOINTS_JSON
 
 
 def _get_xy(person_keypoints, name):
-    """
-    Returns (x, y) for a named keypoint, or None if occluded.
-    """
     kp = person_keypoints.get(name, {})
     if kp.get("occluded", True) or kp.get("x") is None:
         return None
@@ -19,11 +16,6 @@ def _get_xy(person_keypoints, name):
 
 
 def _compute_angle(p1, p2, p3):
-    """
-    Compute the angle at vertex p2 formed by the ray p2→p1
-    and the ray p2→p3.  Returns degrees in [0, 180], or 0.0
-    if any point is missing.
-    """
     if p1 is None or p2 is None or p3 is None:
         return 0.0
 
@@ -39,34 +31,20 @@ def _compute_angle(p1, p2, p3):
 
 
 def extract_features(person_keypoints):
-    """
-    Takes one person's keypoint dictionary (as saved in step 1).
-    Returns a Python list of 14 floats, or None if the person
-    does not have enough visible keypoints to be useful.
-
-    Feature breakdown:
-        [0:8]   Normalized (x, y) for left elbow, right elbow,
-                left wrist, right wrist   (8 values)
-        [8:14]  Angle features: left elbow angle, right elbow
-                angle, left wrist raise, right wrist raise,
-                nose horizontal offset, nose vertical offset
-                (6 values)
-    """
-
-    ls   = _get_xy(person_keypoints, "left_shoulder")
-    rs   = _get_xy(person_keypoints, "right_shoulder")
-    le   = _get_xy(person_keypoints, "left_elbow")
-    re   = _get_xy(person_keypoints, "right_elbow")
-    lw   = _get_xy(person_keypoints, "left_wrist")
-    rw   = _get_xy(person_keypoints, "right_wrist")
+    ls = _get_xy(person_keypoints, "left_shoulder")
+    rs = _get_xy(person_keypoints, "right_shoulder")
+    le = _get_xy(person_keypoints, "left_elbow")
+    re = _get_xy(person_keypoints, "right_elbow")
+    lw = _get_xy(person_keypoints, "left_wrist")
+    rw = _get_xy(person_keypoints, "right_wrist")
     nose = _get_xy(person_keypoints, "nose")
 
     if ls is None and rs is None:
         return None
 
     if ls and rs:
-        center_x       = (ls[0] + rs[0]) / 2.0
-        center_y       = (ls[1] + rs[1]) / 2.0
+        center_x = (ls[0] + rs[0]) / 2.0
+        center_y = (ls[1] + rs[1]) / 2.0
         shoulder_width = math.dist(ls, rs)
     elif ls:
         center_x, center_y = ls
@@ -77,9 +55,7 @@ def extract_features(person_keypoints):
 
     shoulder_width = max(shoulder_width, 1e-6)
 
-
     def norm(pt):
-        """Translate and scale a point into body-relative coordinates."""
         if pt is None:
             return (0.0, 0.0)
         return (
@@ -99,7 +75,7 @@ def extract_features(person_keypoints):
         rw_n[0], rw_n[1],
     ]
 
-    left_elbow_angle  = _compute_angle(ls, le, lw) / 180.0
+    left_elbow_angle = _compute_angle(ls, le, lw) / 180.0
     right_elbow_angle = _compute_angle(rs, re, rw) / 180.0
 
     lw_raise = norm(lw)[1]

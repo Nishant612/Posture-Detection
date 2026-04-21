@@ -21,7 +21,6 @@ from src.Train import PostureClassifier
 
 
 class TemporalSmoother:
-   
 
     def __init__(self, window=SMOOTH_WINDOW):
         self.window  = window
@@ -39,7 +38,7 @@ class TemporalSmoother:
 
 
 def draw_person(frame, bbox, label_idx, confidence, person_id):
-    
+
     x1, y1, x2, y2 = map(int, bbox)
     color      = LABEL_COLORS[label_idx]
     label_text = f"P{person_id}: {LABEL_NAMES[label_idx]} ({confidence:.0%})"
@@ -55,7 +54,7 @@ def draw_person(frame, bbox, label_idx, confidence, person_id):
 
 
 def draw_stats(frame, frame_idx, person_count, behaviour_counts):
-   
+
     h, w = frame.shape[:2]
     panel_x = w - 220
     panel_y = 10
@@ -74,7 +73,7 @@ def draw_stats(frame, frame_idx, person_count, behaviour_counts):
 
 
 def run_inference():
-    
+
     if not os.path.exists(INPUT_VIDEO):
         print(f"[ERROR] Video not found: {INPUT_VIDEO}")
         sys.exit(1)
@@ -86,7 +85,6 @@ def run_inference():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    
     from ultralytics import YOLO
     print(f"[INFO] Loading YOLO model: {YOLO_MODEL}")
     pose_model = YOLO(YOLO_MODEL)

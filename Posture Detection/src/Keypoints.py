@@ -23,7 +23,6 @@ def build_person_keypoints(kp_xy, kp_conf, person_idx):
         conf = float(kp_conf[person_idx][kp_idx])
 
         if conf < KEYPOINT_CONF_THRESHOLD:
-            # Occluded or invisible keypoint
             person_kps[kp_name] = {
                 "x":        None,
                 "y":        None,

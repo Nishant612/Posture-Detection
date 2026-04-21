@@ -43,27 +43,25 @@ LABEL_NAMES = {v: k for k, v in LABEL_MAP.items()}
 
 LABEL_COLORS = {
 
-    0: (0,   255,   0),   
-    1: (0,     0, 255),   
-    2: (0,   165, 255),   
-    3: (0,   255, 255),   
+    0: (0,   255,   0),
+    1: (0,     0, 255),
+    2: (0,   165, 255),
+    3: (0,   255, 255),
 }
 
-NUM_CLASSES    = len(LABEL_MAP)  
-FEATURE_SIZE   = 14                 
+NUM_CLASSES    = len(LABEL_MAP)
+FEATURE_SIZE   = 14
 
-KEYPOINT_CONF_THRESHOLD    = 0.5   
-CLASSIFIER_CONF_THRESHOLD  = 0.7   
+KEYPOINT_CONF_THRESHOLD    = 0.5
+CLASSIFIER_CONF_THRESHOLD  = 0.7
 
-EXTRACT_EVERY_N_FRAMES     = 3     
-INFERENCE_EVERY_N_FRAMES   = 2     
+EXTRACT_EVERY_N_FRAMES     = 3
+INFERENCE_EVERY_N_FRAMES   = 2
 
 EPOCHS         = 50
 BATCH_SIZE     = 32
 LEARNING_RATE  = 0.001
-TRAIN_SPLIT    = 0.8               
+TRAIN_SPLIT    = 0.8
 DROPOUT_RATE   = 0.4
 
-SMOOTH_WINDOW  = 10                
-
-OUTPUT_FPS     = 15
+SMOOTH_WINDOW  = 10
